@@ -1,2 +1,3 @@
 # tla-tpe
-Compilador
+Compilador - Simulacion de orbita de planetas
+
