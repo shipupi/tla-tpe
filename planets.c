@@ -114,12 +114,12 @@ int size = 10;
 	else{
 		initiateSystem(argV[1]);
 		// printf("Body   :     x              y               z           |           vx              vy              vz   ");
-		for(i=0;i<50;i++){
+		for(i=0;i<timeSteps;i++){
 			// printf("\nCycle %d\n",i+1);
 			simulate();
 			for(j=0;j<bodies;j++){
 
-				circle((positions[j].x+20)*10,(positions[j].y+20)*10,10);
+				circle((positions[j].x+20)*10,(positions[j].y+20)*10,1);
 
 			}
 				// printf("Body %d : %lf\t%f\t%lf\t|\t%lf\t%lf\t%lf\n",j+1,positions[j].x,positions[j].y,positions[j].z,velocities[j].x,velocities[j].y,velocities[j].z);
