@@ -11,3 +11,6 @@ Input file:\
   
 Run:\
 ./planets inputFile.txt
+
+Rosetta code:
+https://rosettacode.org/wiki/N-body_problem#C
