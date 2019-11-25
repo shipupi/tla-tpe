@@ -3,7 +3,9 @@
 #include<stdbool.h>
 #include<math.h>
 #include <graphics.h>
- 
+
+
+
 typedef struct{
 	double x,y,z;
 }vector;
@@ -126,21 +128,42 @@ int main(int argC,char* argV[])
 		fprintf(stderr, "Usage : %s <file name containing system configuration data>\n",argV[0]);
 	else{
 		initiateSystem(argV[1]);
+		int xoffset = getmaxx() / 2;
+		int yoffset = getmaxy() / 2;
+		int scale = 1;
 		if (!visual) {
 			fprintf(stderr, "Body   :     x              y               z           |           vx              vy              vz   ");
 		}
 		for(i=0;i<timeSteps;i++){
 			fprintf(stderr, "\nCycle %d\n",i+1);
 			simulate();
+			if (i == 0) {
+				int xm = 0;
+				int ym = 0;
+				for(j=0;j<bodies;j++){
+					if (positions[j].x > xm) {
+						xm = positions[j].x;
+					}
+					if (positions[j].y > ym) {
+						ym = positions[j].y;
+					}
+				}
+				int determining_value = MAX(xm,ym);
+				if (determining_value == xm) {
+					scale = (0.8 * getmaxx() / 2) / xm;
+				} else {
+					scale = (0.8 * getmaxy() / 2) / ym;
+				}
+			}
 			for(j=0;j<bodies;j++){
 				if (visual)  {
 									/* code */
-					circle((positions[j].x+20)*10,(positions[j].y+20)*10,1);
+					circle((positions[j].x*scale+xoffset),(positions[j].y*scale+yoffset),1);
 				}				
 				fprintf(stderr, "Body %d : %lf\t%f\t%lf\t|\t%lf\t%lf\t%lf\n",j+1,positions[j].x,positions[j].y,positions[j].z,velocities[j].x,velocities[j].y,velocities[j].z);
 			}
 			if (visual)  {
-				delay(10);
+				delay(3);
 			}
 
 		}
