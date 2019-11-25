@@ -1,5 +1,6 @@
 #include<stdlib.h>
 #include<stdio.h>
+#include<stdbool.h>
 #include<math.h>
 #include <graphics.h>
  
@@ -27,6 +28,11 @@ vector subtractVectors(vector a,vector b){
 	vector c = {a.x-b.x,a.y-b.y,a.z-b.z};
  
 	return c;
+}
+
+static void sigterm_handler(const int signal) {
+  printf("Signal detected\n");
+  abort();
 }
  
 double mod(vector a){
@@ -104,26 +110,38 @@ void simulate(){
  
 int main(int argC,char* argV[])
 {
-	int i,j;
 
+	int i,j;
+	int visual = true;
 	int gd = DETECT, gm; 
-    initgraph(&gd, &gm, NULL);
-int size = 10;
+	
+
+	signal(SIGTERM, sigterm_handler);
+  	signal(SIGINT, sigterm_handler);
+
+	if (visual) {
+    	initgraph(&gd, &gm, NULL);
+	}
 	if(argC!=2)
 		fprintf(stderr, "Usage : %s <file name containing system configuration data>\n",argV[0]);
 	else{
 		initiateSystem(argV[1]);
-		// printf("Body   :     x              y               z           |           vx              vy              vz   ");
+		if (!visual) {
+			fprintf(stderr, "Body   :     x              y               z           |           vx              vy              vz   ");
+		}
 		for(i=0;i<timeSteps;i++){
-			// printf("\nCycle %d\n",i+1);
+			fprintf(stderr, "\nCycle %d\n",i+1);
 			simulate();
 			for(j=0;j<bodies;j++){
-
-				circle((positions[j].x+20)*10,(positions[j].y+20)*10,1);
-
+				if (visual)  {
+									/* code */
+					circle((positions[j].x+20)*10,(positions[j].y+20)*10,1);
+				}				
+				fprintf(stderr, "Body %d : %lf\t%f\t%lf\t|\t%lf\t%lf\t%lf\n",j+1,positions[j].x,positions[j].y,positions[j].z,velocities[j].x,velocities[j].y,velocities[j].z);
 			}
-				// printf("Body %d : %lf\t%f\t%lf\t|\t%lf\t%lf\t%lf\n",j+1,positions[j].x,positions[j].y,positions[j].z,velocities[j].x,velocities[j].y,velocities[j].z);
-		delay(100);
+			if (visual)  {
+				delay(10);
+			}
 
 		}
 
