@@ -110,7 +110,7 @@ int main(int argC,char* argV[])
     initgraph(&gd, &gm, NULL);
 int size = 10;
 	if(argC!=2)
-		printf("Usage : %s <file name containing system configuration data>",argV[0]);
+		fprintf(stderr, "Usage : %s <file name containing system configuration data>\n",argV[0]);
 	else{
 		initiateSystem(argV[1]);
 		// printf("Body   :     x              y               z           |           vx              vy              vz   ");
