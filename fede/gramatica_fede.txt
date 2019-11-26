@@ -1,0 +1,92 @@
+entity -> 	prim_declaration int_assign SEMICOLON NEWLINE entity
+			| prim_declaration string_assign SEMICOLON NEWLINE entity
+			| declaration SEMICOLON NEWLINE entity
+			| control_block NEWLINE entity
+			| VAR_NAME int_assign SEMICOLON NEWLINE entity
+			| VAR_NAME string_assign SEMICOLON NEWLINE entity
+			| VAR_NAME INC_OP SEMICOLON NEWLINE entity
+			| VAR_NAME DEC_OP SEMICOLON NEWLINE entity
+			| VAR_NAME assign_property SEMICOLON NEWLINE entity
+
+assign_property -> 	DOT int_property int_assign
+					| DOT string_property string_assign
+					| DOT boolean_property boolean_assign
+
+int_property ->	XVEL
+				| YVEL
+				| XPOS
+				| YPOS
+				| MASS
+				| RADIUS
+
+string_property ->	NAME
+					| COLOR
+
+bool_assign -> ASSIGN bool_expression
+
+
+declaration ->	prim_type VAR_NAME
+				| PLANET_VAR VAR_NAME
+
+prim_declaration -> prim_type VAR_NAME
+
+
+prim_type ->	STRING
+				| INT
+
+int_assign -> ASSIGN expression
+
+expression ->	term
+				| expression ADD_OP term
+    			| expression SUB_OP term
+
+term ->	factor
+    	| term MUL_OP factor
+    	| term DIV_OP factor
+
+factor ->	primary
+    		| SUB_OP factor
+    		| ADD_OP factor
+
+primary ->	IDENTIFIER
+			| NUMS
+			| DECIMAL
+    		| OPEN_PAR expression CLOSE_PAR
+
+string_assign ->	ASSIGN QUOTATION string_content QUOTATION
+
+
+control_block -> 	conditional
+					| while
+
+
+conditional -> 	IF OPEN_PAR boolean_expression CLOSE_PAR OPEN_CURLY dsafsdnafjkd CLOSE_CURLY 
+				| IF OPEN_PAR boolean_expression CLOSE_PAR OPEN_CURLY fbdsjahkaldfnja CLOSE_CURLY ELSE OPEN_CURLY nfdjskafndsjak CLOSE_CURLY
+
+while ->	WHILE OPEN_PAR boolean_expression CLOSE_PAR OPEN_CURLY dsafsdnafjkd CLOSE_CURLY 
+			| DO OPEN_CURLY dsafsdnafjkd CLOSE_CURLY WHILE OPEN_PAR boolean_expression CLOSE_PAR SEMICOLON
+
+
+
+boolean_expression ->	boolean_term
+						| boolean_expression OR_OP boolean_term
+
+boolean_term -> 	boolean_factor
+					| boolean_term AND_OP boolean_factor
+
+boolean_factor -> 	OPEN_PAR boolean_expression CLOSE_PAR 
+					| NOT_OP boolean_factor 
+					| boolean
+
+boolean -> 	TRUE 
+			| FALSE 
+			| comparison
+
+comparison ->  expression compare_operator expression
+
+compare_operator ->	GT_OP
+					| GE_OP
+					| EQ_OP
+					| LE_OP
+					| LT_OP
+					| NE_OP
