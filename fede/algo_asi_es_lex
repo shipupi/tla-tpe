@@ -54,6 +54,7 @@ false			return FALSE;
 [a-zA-Z]+		return VAR_NAME
 [0-9]+			return NUMBER
 [0-9]+[.][0-9]+	return DECIMAL
+[a-zA-Z0-9]		return STRING_CONTENT
 
 
 %%
