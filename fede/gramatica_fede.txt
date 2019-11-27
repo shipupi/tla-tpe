@@ -7,10 +7,13 @@ entity -> 	prim_declaration int_assign SEMICOLON NEWLINE entity
 			| VAR_NAME INC_OP SEMICOLON NEWLINE entity
 			| VAR_NAME DEC_OP SEMICOLON NEWLINE entity
 			| VAR_NAME assign_property SEMICOLON NEWLINE entity
+			| print SEMICOLON NEWLINE entity
+
+print ->	PRINT OPEN_PAR VAR_NAME CLOSE_PAR
 
 assign_property -> 	DOT int_property int_assign
 					| DOT string_property string_assign
-					| DOT boolean_property boolean_assign
+					| DOT bool_property bool_assign
 
 int_property ->	XVEL
 				| YVEL
@@ -21,6 +24,8 @@ int_property ->	XVEL
 
 string_property ->	NAME
 					| COLOR
+
+bool_property ->	VISIBILITY
 
 bool_assign -> ASSIGN bool_expression
 
@@ -48,7 +53,7 @@ factor ->	primary
     		| SUB_OP factor
     		| ADD_OP factor
 
-primary ->	IDENTIFIER
+primary ->	VAR_NAME
 			| NUMS
 			| DECIMAL
     		| OPEN_PAR expression CLOSE_PAR
@@ -60,25 +65,25 @@ control_block -> 	conditional
 					| while
 
 
-conditional -> 	IF OPEN_PAR boolean_expression CLOSE_PAR OPEN_CURLY dsafsdnafjkd CLOSE_CURLY 
-				| IF OPEN_PAR boolean_expression CLOSE_PAR OPEN_CURLY fbdsjahkaldfnja CLOSE_CURLY ELSE OPEN_CURLY nfdjskafndsjak CLOSE_CURLY
+conditional -> 	IF OPEN_PAR bool_expression CLOSE_PAR OPEN_CURLY entity CLOSE_CURLY 
+				| IF OPEN_PAR bool_expression CLOSE_PAR OPEN_CURLY entity CLOSE_CURLY ELSE OPEN_CURLY entity CLOSE_CURLY
 
-while ->	WHILE OPEN_PAR boolean_expression CLOSE_PAR OPEN_CURLY dsafsdnafjkd CLOSE_CURLY 
-			| DO OPEN_CURLY dsafsdnafjkd CLOSE_CURLY WHILE OPEN_PAR boolean_expression CLOSE_PAR SEMICOLON
+while ->	WHILE OPEN_PAR bool_expression CLOSE_PAR OPEN_CURLY entity CLOSE_CURLY 
+			| DO OPEN_CURLY entity CLOSE_CURLY WHILE OPEN_PAR bool_expression CLOSE_PAR SEMICOLON
 
 
 
-boolean_expression ->	boolean_term
-						| boolean_expression OR_OP boolean_term
+bool_expression ->	bool_term
+						| bool_expression OR_OP bool_term
 
-boolean_term -> 	boolean_factor
-					| boolean_term AND_OP boolean_factor
+bool_term -> 	bool_factor
+					| bool_term AND_OP bool_factor
 
-boolean_factor -> 	OPEN_PAR boolean_expression CLOSE_PAR 
-					| NOT_OP boolean_factor 
-					| boolean
+bool_factor -> 	OPEN_PAR bool_expression CLOSE_PAR 
+					| NOT_OP bool_factor 
+					| bool
 
-boolean -> 	TRUE 
+bool -> 	TRUE 
 			| FALSE 
 			| comparison
 
