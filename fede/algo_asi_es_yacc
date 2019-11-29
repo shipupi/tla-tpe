@@ -16,7 +16,7 @@
 %token DOT OPEN_CURLY CLOSE_CURLY OPEN_PAR CLOSE_PAR
 %token ASSIGN QUOTATION
 %token XVEL YVEL XPOS YPOS MASS VISIBILITY RADIUS COLOR NAME
-%token PRINT
+%token PRINT ADD_PLANET
 %token INC_OP DEC_OP ADD_OP SUB_OP MUL_OP DIV_OP
 %token OR_OP AND_OP NOT_OP 
 %token GT_OP GE_OP EQ_OP LE_OP LT_OP NE_OP
@@ -50,11 +50,14 @@ entity	:
 		| VAR_NAME DEC_OP SEMICOLON NEWLINE entity
 		| VAR_NAME assign_property SEMICOLON NEWLINE entity
 		| print SEMICOLON NEWLINE entity
+		| addplanet SEMICOLON NEWLINE entity
 		;
 
 
 print 	: PRINT OPEN_PAR VAR_NAME CLOSE_PAR
 		;
+
+addplanet	: ADD_PLANET OPEN_PAR VAR_NAME CLOSE_PAR
 
 
 assign_property 	: DOT int_property int_assign

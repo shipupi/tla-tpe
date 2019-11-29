@@ -14,6 +14,7 @@ do 				return DO;
 Planet			return PLANET_VAR;
 int				return INT_VAR;
 string 			return STR_VAR;
+addplanet		return ADD_PLANET;
 [0-9]+			return NUMBER;
 (".")			return DOT;
 ("{")			return OPEN_CURLY;
