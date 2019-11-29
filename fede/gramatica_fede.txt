@@ -8,8 +8,12 @@ entity -> 	prim_declaration int_assign SEMICOLON NEWLINE entity
 			| VAR_NAME DEC_OP SEMICOLON NEWLINE entity
 			| VAR_NAME assign_property SEMICOLON NEWLINE entity
 			| print SEMICOLON NEWLINE entity
+			| addplanet SEMICOLON NEWLINE entity
 
 print ->	PRINT OPEN_PAR VAR_NAME CLOSE_PAR
+
+addplanet ->	ADD_PLANET OPEN_PAR VAR_NAME CLOSE_PAR
+
 
 assign_property -> 	DOT int_property int_assign
 					| DOT string_property string_assign
