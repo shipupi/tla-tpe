@@ -6,6 +6,7 @@
 
 
 	//Todo esto que son vectores se podria hacer con una suerte de lista para no tener quilombos si definen mas de n cosas pero es para que este la idea de lo q se necesita
+	//En alguna pagina vi que usan como una tabla medio turbia pero no le di mucha bola
 
 	char * nummeric_vars_n[10];
 	int nummeric_vars_v[10];
