@@ -564,11 +564,11 @@ static const yytype_uint8 yyrline[] =
 {
        0,    67,    67,    68,    69,    70,    71,    72,    73,    74,
       75,    76,    77,    78,    82,    85,   116,   117,   118,   119,
-     120,   121,   122,   123,   124,   128,   132,   133,   134,   141,
-     145,   146,   147,   151,   152,   153,   157,   158,   159,   163,
-     164,   165,   166,   170,   174,   175,   179,   180,   184,   185,
-     189,   190,   194,   195,   199,   200,   201,   205,   206,   207,
-     211,   215,   216,   217,   218,   219,   220
+     120,   121,   122,   123,   124,   129,   133,   134,   135,   142,
+     146,   147,   148,   152,   153,   154,   158,   159,   160,   164,
+     165,   166,   167,   171,   175,   176,   180,   181,   185,   186,
+     190,   191,   195,   196,   200,   201,   202,   206,   207,   208,
+     212,   216,   217,   218,   219,   220,   221
 };
 #endif
 
@@ -1501,175 +1501,175 @@ yyreduce:
     break;
 
   case 26:
-#line 132 "algo_asi_es_yacc" /* yacc.c:1646  */
+#line 133 "algo_asi_es_yacc" /* yacc.c:1646  */
     {/*CHECK SI EXISTE STR VAR_NAME, sino declarar*/}
 #line 1507 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 27:
-#line 133 "algo_asi_es_yacc" /* yacc.c:1646  */
+#line 134 "algo_asi_es_yacc" /* yacc.c:1646  */
     {/*CHECK SI EXISTE INT VAR_NAME, sino declarar*/}
 #line 1513 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 28:
-#line 134 "algo_asi_es_yacc" /* yacc.c:1646  */
+#line 135 "algo_asi_es_yacc" /* yacc.c:1646  */
     {/*CHECK SI EXISTE Planet VAR_NAME, sino declarar*/}
 #line 1519 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 29:
-#line 141 "algo_asi_es_yacc" /* yacc.c:1646  */
+#line 142 "algo_asi_es_yacc" /* yacc.c:1646  */
     {(yyval.number) = (yyvsp[0].number);}
 #line 1525 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 30:
-#line 145 "algo_asi_es_yacc" /* yacc.c:1646  */
+#line 146 "algo_asi_es_yacc" /* yacc.c:1646  */
     {(yyval.number) = (yyvsp[0].number);}
 #line 1531 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 31:
-#line 146 "algo_asi_es_yacc" /* yacc.c:1646  */
+#line 147 "algo_asi_es_yacc" /* yacc.c:1646  */
     {(yyval.number) = (yyvsp[-2].number) + (yyvsp[0].number);}
 #line 1537 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 32:
-#line 147 "algo_asi_es_yacc" /* yacc.c:1646  */
+#line 148 "algo_asi_es_yacc" /* yacc.c:1646  */
     {(yyval.number) = (yyvsp[-2].number) - (yyvsp[0].number);}
 #line 1543 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 33:
-#line 151 "algo_asi_es_yacc" /* yacc.c:1646  */
+#line 152 "algo_asi_es_yacc" /* yacc.c:1646  */
     {(yyval.number) = (yyvsp[0].number);}
 #line 1549 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 34:
-#line 152 "algo_asi_es_yacc" /* yacc.c:1646  */
+#line 153 "algo_asi_es_yacc" /* yacc.c:1646  */
     {(yyval.number) = (yyvsp[-2].number) * (yyvsp[0].number);}
 #line 1555 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 35:
-#line 153 "algo_asi_es_yacc" /* yacc.c:1646  */
+#line 154 "algo_asi_es_yacc" /* yacc.c:1646  */
     {(yyval.number) = (yyvsp[-2].number) / (yyvsp[0].number);}
 #line 1561 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 157 "algo_asi_es_yacc" /* yacc.c:1646  */
+#line 158 "algo_asi_es_yacc" /* yacc.c:1646  */
     {(yyval.number) = (yyvsp[0].number);}
 #line 1567 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 158 "algo_asi_es_yacc" /* yacc.c:1646  */
+#line 159 "algo_asi_es_yacc" /* yacc.c:1646  */
     {(yyval.number) = -(yyvsp[0].number);}
 #line 1573 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 38:
-#line 159 "algo_asi_es_yacc" /* yacc.c:1646  */
+#line 160 "algo_asi_es_yacc" /* yacc.c:1646  */
     {(yyval.number) = (yyvsp[0].number);}
 #line 1579 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 39:
-#line 163 "algo_asi_es_yacc" /* yacc.c:1646  */
+#line 164 "algo_asi_es_yacc" /* yacc.c:1646  */
     {/*RECUPERAR VALOR DEL ARRAY*/}
 #line 1585 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 164 "algo_asi_es_yacc" /* yacc.c:1646  */
+#line 165 "algo_asi_es_yacc" /* yacc.c:1646  */
     {(yyval.number) = (yyvsp[0].number);}
 #line 1591 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 165 "algo_asi_es_yacc" /* yacc.c:1646  */
+#line 166 "algo_asi_es_yacc" /* yacc.c:1646  */
     {(yyval.number) = (yyvsp[0].number);}
 #line 1597 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 42:
-#line 166 "algo_asi_es_yacc" /* yacc.c:1646  */
+#line 167 "algo_asi_es_yacc" /* yacc.c:1646  */
     {(yyval.number) = (yyvsp[-1].number);}
 #line 1603 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 43:
-#line 170 "algo_asi_es_yacc" /* yacc.c:1646  */
+#line 171 "algo_asi_es_yacc" /* yacc.c:1646  */
     {(yyval.str) = (yyvsp[-1].str);}
 #line 1609 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 50:
-#line 189 "algo_asi_es_yacc" /* yacc.c:1646  */
+#line 190 "algo_asi_es_yacc" /* yacc.c:1646  */
     {(yyval.boolean) = (yyvsp[0].boolean);}
 #line 1615 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 51:
-#line 190 "algo_asi_es_yacc" /* yacc.c:1646  */
+#line 191 "algo_asi_es_yacc" /* yacc.c:1646  */
     {(yyval.boolean) = (yyvsp[-2].boolean) || (yyvsp[0].boolean);}
 #line 1621 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 52:
-#line 194 "algo_asi_es_yacc" /* yacc.c:1646  */
+#line 195 "algo_asi_es_yacc" /* yacc.c:1646  */
     {(yyval.boolean) = (yyvsp[0].boolean);}
 #line 1627 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 53:
-#line 195 "algo_asi_es_yacc" /* yacc.c:1646  */
+#line 196 "algo_asi_es_yacc" /* yacc.c:1646  */
     {(yyval.boolean) = (yyvsp[-2].boolean) && (yyvsp[0].boolean);}
 #line 1633 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 54:
-#line 199 "algo_asi_es_yacc" /* yacc.c:1646  */
+#line 200 "algo_asi_es_yacc" /* yacc.c:1646  */
     {(yyval.boolean) = (yyvsp[-1].boolean);}
 #line 1639 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 55:
-#line 200 "algo_asi_es_yacc" /* yacc.c:1646  */
+#line 201 "algo_asi_es_yacc" /* yacc.c:1646  */
     {(yyval.boolean) = !(yyvsp[0].boolean);}
 #line 1645 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 56:
-#line 201 "algo_asi_es_yacc" /* yacc.c:1646  */
+#line 202 "algo_asi_es_yacc" /* yacc.c:1646  */
     {(yyval.boolean) = (yyvsp[0].boolean);}
 #line 1651 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 57:
-#line 205 "algo_asi_es_yacc" /* yacc.c:1646  */
+#line 206 "algo_asi_es_yacc" /* yacc.c:1646  */
     {(yyval.boolean) = true;}
 #line 1657 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 58:
-#line 206 "algo_asi_es_yacc" /* yacc.c:1646  */
+#line 207 "algo_asi_es_yacc" /* yacc.c:1646  */
     {(yyval.boolean) = false;}
 #line 1663 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 59:
-#line 207 "algo_asi_es_yacc" /* yacc.c:1646  */
+#line 208 "algo_asi_es_yacc" /* yacc.c:1646  */
     {(yyval.boolean) = (yyvsp[0].boolean);}
 #line 1669 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 60:
-#line 211 "algo_asi_es_yacc" /* yacc.c:1646  */
+#line 212 "algo_asi_es_yacc" /* yacc.c:1646  */
     {(yyval.boolean) = true;}
 #line 1675 "y.tab.c" /* yacc.c:1646  */
     break;
@@ -1903,7 +1903,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 222 "algo_asi_es_yacc" /* yacc.c:1906  */
+#line 223 "algo_asi_es_yacc" /* yacc.c:1906  */
 
 
 void yyerror(char const *s)

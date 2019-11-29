@@ -122,6 +122,7 @@ assign_property 	: VAR_NAME DOT XVEL int_assign
 					| VAR_NAME DOT NAME string_assign
 					| VAR_NAME DOT COLOR string_assign
 					| VAR_NAME DOT VISIBILITY bool_assign
+					;
 
 
 
