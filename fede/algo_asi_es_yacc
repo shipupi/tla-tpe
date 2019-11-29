@@ -1,11 +1,39 @@
 %{
+	#include <stdio.h>
+	#include <stdbool.h>
+	int yylex();
+	void yyerror(char const *s);
+
+	char * nummeric_vars_n[10];
+	int nummeric_vars_v[10];
+	int nummeric_idx;
+
+	char * string_vars_n[10];
+	int string_vars_v[10];
+	int string_idx;
+
+	char * planet_names[10];
+	char * planet_color[10];
+
+	int planet_xvel[10];
+	int planet_yvel[10];
+	int planet_xpos[10];
+	int planet_ypos[10];
+	int planet_mass[10];
+	int planet_radius[10];
+
+	bool planet_visibility[10];
+
+	int planet_idx;
+
+	int current_idx;
+
 
 %}
 
 %union {
  	int number;
  	char * str;
- 	PLANETA ??
 }
 
 %token SEMICOLON NEWLINE
@@ -24,15 +52,8 @@
 %token NUMBER DECIMAL
 
 
-| No estoy muy seguro para que se usa type |
-v								           v
-
-%type <number> 
+%type <str> VAR_NAME print
 %type <number> NUMBER
-
-%type <str> VAR_NAME STRING_CONTENT
-
-%type <PLANETA>
 
 %start entity
 
@@ -40,33 +61,33 @@ v								           v
 
 
 entity	: 
-		| prim_declaration int_assign SEMICOLON NEWLINE entity
-		| prim_declaration string_assign SEMICOLON NEWLINE entity
-		| declaration SEMICOLON NEWLINE entity
+		| INT_VAR VAR_NAME int_assign SEMICOLON NEWLINE entity			{//CHECK SI EXISTE INT VAR_NAME, sino declarar y asignar int_assign}
+		| STR_VAR VAR_NAME string_assign SEMICOLON NEWLINE entity		{//CHECK SI EXISTE STR VAR_NAME, sino declarar y asignar string_assign}
+		| declaration SEMICOLON NEWLINE entity							{//SE RESUELVE ADENTRO}
 		| control_block NEWLINE entity
-		| VAR_NAME int_assign SEMICOLON NEWLINE entity
-		| VAR_NAME string_assign SEMICOLON NEWLINE entity
-		| VAR_NAME INC_OP SEMICOLON NEWLINE entity
-		| VAR_NAME DEC_OP SEMICOLON NEWLINE entity
-		| VAR_NAME assign_property SEMICOLON NEWLINE entity
-		| print SEMICOLON NEWLINE entity
-		| addplanet SEMICOLON NEWLINE entity
+		| VAR_NAME int_assign SEMICOLON NEWLINE entity					{//CHECK SI EXISTE INT VAR_NAME y asignar int_assign, sino error}					
+		| VAR_NAME string_assign SEMICOLON NEWLINE entity				{//CHECK SI EXISTE STR VAR_NAME y asignar str_assign, sino error}
+		| VAR_NAME INC_OP SEMICOLON NEWLINE entity						{//CHECK SI EXISTE INT VAR_NAME y aumentar, sino error}
+		| VAR_NAME DEC_OP SEMICOLON NEWLINE entity						{//CHECK SI EXISTE INT VAR_NAME y decrementar, sino error}
+		| assign_property SEMICOLON NEWLINE entity						
+		| print SEMICOLON NEWLINE entity						
+		| addplanet SEMICOLON NEWLINE entity							{//GENERAR EL PRINT AL ARCHIVO DE OUTPUT DEL PLANETA CORRESPONDIENTE}
 		;
 
 
-print 	: PRINT OPEN_PAR VAR_NAME CLOSE_PAR
+print 	: PRINT OPEN_PAR VAR_NAME CLOSE_PAR  {printf("printing: %s",$3);}
 		;
 
 addplanet	: ADD_PLANET OPEN_PAR VAR_NAME CLOSE_PAR
 
 
-assign_property 	: DOT int_property int_assign
-					| DOT string_property string_assign
-					| DOT bool_property bool_assign
-					;
+assign_property 	: VAR_NAME DOT int_property int_assign						{//int_property[idx] = int_assign}
+					| VAR_NAME DOT string_property string_assign				{//string_property[idx] = string_assign}
+					| VAR_NAME DOT bool_property bool_assign					{//bool_property[idx] = bool_assign}
+					;		
 
 
-int_property 	: XVEL
+int_property 	: XVEL 
 				| YVEL
 				| XPOS
 				| YPOS
@@ -88,21 +109,16 @@ bool_assign		: ASSIGN bool_expression
 				;
 
 
-declaration 	: prim_type VAR_NAME
-				| PLANET_VAR VAR_NAME
+declaration 	: STR_VAR VAR_NAME			{//CHECK SI EXISTE STR VAR_NAME, sino declarar}
+				| INT_VAR VAR_NAME			{//CHECK SI EXISTE INT VAR_NAME, sino declarar}
+				| PLANET_VAR VAR_NAME		{//CHECK SI EXISTE Planet VAR_NAME, sino declarar}
 				;
 
 
-prim_declaration	: prim_type VAR_NAME
-					;
 
 
-prim_type	: STRING
-			| INT
-			;
 
-
-int_assign	: ASSIGN expression
+int_assign	: ASSIGN expression  
 			;
 
 
@@ -125,7 +141,7 @@ factor 	: primary
 
 
 primary		: VAR_NAME
-			| NUMS
+			| NUMBER 			{printf("%d",$1);}
 			| DECIMAL
     		| OPEN_PAR expression CLOSE_PAR
     		;
@@ -183,4 +199,17 @@ compare_operator 	: GT_OP
 					| LT_OP
 					| NE_OP
 					;
+%%
 
+void yyerror(char const *s)
+{
+    printf("yyerror  %s\n",s);
+    return ;
+}
+
+int main()
+{
+  yyparse();
+  return 1;
+}
+    

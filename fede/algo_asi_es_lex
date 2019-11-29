@@ -1,6 +1,7 @@
 
 %{
 	#include <stdio.h>
+	#include <stdlib.h>
 	#include "y.tab.h" 
 %}
 
@@ -15,7 +16,6 @@ Planet			return PLANET_VAR;
 int				return INT_VAR;
 string 			return STR_VAR;
 addplanet		return ADD_PLANET;
-[0-9]+			return NUMBER;
 (".")			return DOT;
 ("{")			return OPEN_CURLY;
 ("}")			return CLOSE_CURLY;
@@ -43,19 +43,35 @@ print			return PRINT;
 ("&&")			return AND_OP;
 ("!")			return NOT_OP;
 (">")			return GT_OP;
-(">=")			retrun GE_OP;
-("==)			return EQ_OP;
+(">=")			return GE_OP;
+("==")			return EQ_OP;
 ("<=")			return LE_OP;
 ("<")			return LT_OP;
 ("!=")			return NE_OP;
-true			retrun TRUE;
+true			return TRUE;
 false			return FALSE;
-("\n")			return NEWLINE
-["]				return QUOTATION
-[a-zA-Z]+		return VAR_NAME
-[0-9]+			return NUMBER
-[0-9]+[.][0-9]+	return DECIMAL
-[a-zA-Z0-9]		return STRING_CONTENT
+("\n")			return NEWLINE;
+["]				return QUOTATION;
+[a-zA-Z]+		{
+
+					char * ptr_String = (char *)calloc(strlen(yytext)+1, sizeof(char));
+              		strcpy(ptr_String, yytext);
+              		yylval.str = ptr_String;
+              		return VAR_NAME;
+              	}
+
+[0-9]+			{	
+					yylval.number = atoi(yytext);
+					return NUMBER;
+				}
+[0-9]+[.][0-9]+	return DECIMAL;
+[a-zA-Z0-9]+	return STRING_CONTENT;
+.				;
 
 
 %%
+
+int yywrap()
+{
+	return 1;
+}
