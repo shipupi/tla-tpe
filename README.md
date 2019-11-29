@@ -16,3 +16,9 @@ Run:<br />
 
 Rosetta code:<br />
 https://rosettacode.org/wiki/N-body_problem#C<br />
+
+
+Desde el directorio fede: <br />
+./make_parser.sh <br />
+
+Genera los yacc lex y un archivo output.sh que come por entrada estandar y va haciendo las cosas <br />
