@@ -209,17 +209,15 @@ bool 	: TRUE 												{$$ = true;}
 		;
 
 
-comparison 		: expression compare_operator expression 	{$$ = true;}
+comparison 		: expression GT_OP expression 	{$$ = $1 > $3;} 
+				| expression GE_OP expression 	{$$ = $1>= $3;} 
+				| expression EQ_OP expression 	{$$ = $1 == $3;}
+				| expression LE_OP expression 	{$$ = $1 < $3;}
+				| expression LT_OP expression 	{$$ = $1 <= $3;}
+				| expression NE_OP expression 	{$$ = $1 != $3;}
 				;
 
 
-compare_operator 	: GT_OP
-					| GE_OP
-					| EQ_OP
-					| LE_OP
-					| LT_OP
-					| NE_OP
-					;
 %%
 
 void yyerror(char const *s)
