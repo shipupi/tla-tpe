@@ -4,6 +4,9 @@
 	int yylex();
 	void yyerror(char const *s);
 
+
+	//Todo esto que son vectores se podria hacer con una suerte de lista para no tener quilombos si definen mas de n cosas pero es para que este la idea de lo q se necesita
+
 	char * nummeric_vars_n[10];
 	int nummeric_vars_v[10];
 	int nummeric_idx;
@@ -26,7 +29,6 @@
 
 	int planet_idx;
 
-	int current_idx;
 
 
 %}
@@ -83,9 +85,13 @@ print 	: PRINT OPEN_PAR VAR_NAME CLOSE_PAR  {printf("printing: %s",$3);}
 addplanet	: ADD_PLANET OPEN_PAR VAR_NAME CLOSE_PAR
 
 
-assign_property 	: VAR_NAME DOT int_property int_assign						{/*int_property[idx] = int_assign*/}
-					| VAR_NAME DOT string_property string_assign				{/*string_property[idx] = string_assign*/}
-					| VAR_NAME DOT bool_property bool_assign					{/*bool_property[idx] = bool_assign*/}
+/* PARA FACILITARNOS LA VIDA PODEMOS REMOVER int_property, string_property Y bool_property Y CONDENSAR TODAS LAS PRODUCCIONES EN ASSIGN PROPERTY, VA A QUEDAR MAS FEO PERO VA A SER MAS FACIL */
+/* (Es lo que esta sin comentar abajo) */
+
+/*
+assign_property 	: VAR_NAME DOT int_property int_assign						{int_property[idx] = int_assign}
+					| VAR_NAME DOT string_property string_assign				{string_property[idx] = string_assign}
+					| VAR_NAME DOT bool_property bool_assign					{bool_property[idx] = bool_assign}
 					;		
 
 
@@ -105,6 +111,18 @@ string_property		: NAME
 
 bool_property	: VISIBILITY
 				;
+*/
+
+assign_property 	: VAR_NAME DOT XVEL int_assign
+					| VAR_NAME DOT YVEL int_assign	
+					| VAR_NAME DOT XPOS int_assign
+					| VAR_NAME DOT YPOS int_assign
+					| VAR_NAME DOT MASS int_assign
+					| VAR_NAME DOT RADIUS int_assign
+					| VAR_NAME DOT NAME string_assign
+					| VAR_NAME DOT COLOR string_assign
+					| VAR_NAME DOT VISIBILITY bool_assign
+
 
 
 bool_assign		: ASSIGN bool_expression

@@ -1047,7 +1047,7 @@ return QUOTATION;
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 56 "algo_asi_es_lex"
+#line 57 "algo_asi_es_lex"
 {
 					char * ptr_String = (char *)calloc(strlen(yytext)+1, sizeof(char));
               		strcpy(ptr_String, yytext);
@@ -1057,7 +1057,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 63 "algo_asi_es_lex"
+#line 64 "algo_asi_es_lex"
 {	
 					yylval.number = atoi(yytext);
 					return NUMBER;
@@ -1065,25 +1065,32 @@ YY_RULE_SETUP
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 67 "algo_asi_es_lex"
-return DECIMAL;
+#line 69 "algo_asi_es_lex"
+{ 	/* PASAJE DE STRING A NUMERO CON DECIMALES*/
+					return DECIMAL;
+				}
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 68 "algo_asi_es_lex"
-return STRING_CONTENT;
+#line 73 "algo_asi_es_lex"
+{
+					char * ptr_String = (char *)calloc(strlen(yytext)+1, sizeof(char));
+              		strcpy(ptr_String, yytext);
+              		yylval.str = ptr_String;
+              		return VAR_NAME;
+              	}
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 69 "algo_asi_es_lex"
+#line 80 "algo_asi_es_lex"
 ;
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 72 "algo_asi_es_lex"
+#line 83 "algo_asi_es_lex"
 ECHO;
 	YY_BREAK
-#line 1087 "lex.yy.c"
+#line 1094 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2088,7 +2095,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 72 "algo_asi_es_lex"
+#line 83 "algo_asi_es_lex"
 
 
 int yywrap()

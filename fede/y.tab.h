@@ -150,7 +150,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 34 "algo_asi_es_yacc" /* yacc.c:1909  */
+#line 36 "algo_asi_es_yacc" /* yacc.c:1909  */
 
  	float number;
  	char * str;
