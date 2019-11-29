@@ -544,9 +544,10 @@ char *yytext;
 #line 3 "algo_asi_es_lex"
 	#include <stdio.h>
 	#include <stdlib.h>
+	#include <stdbool.h>
 	#include "y.tab.h" 
-#line 549 "lex.yy.c"
 #line 550 "lex.yy.c"
+#line 551 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -763,10 +764,10 @@ YY_DECL
 		}
 
 	{
-#line 9 "algo_asi_es_lex"
+#line 10 "algo_asi_es_lex"
 
 
-#line 770 "lex.yy.c"
+#line 771 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -825,230 +826,229 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 11 "algo_asi_es_lex"
+#line 12 "algo_asi_es_lex"
 return IF;
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 12 "algo_asi_es_lex"
+#line 13 "algo_asi_es_lex"
 return ELSE;
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 13 "algo_asi_es_lex"
+#line 14 "algo_asi_es_lex"
 return WHILE;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 14 "algo_asi_es_lex"
+#line 15 "algo_asi_es_lex"
 return DO;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 15 "algo_asi_es_lex"
+#line 16 "algo_asi_es_lex"
 return PLANET_VAR;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 16 "algo_asi_es_lex"
+#line 17 "algo_asi_es_lex"
 return INT_VAR;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 17 "algo_asi_es_lex"
+#line 18 "algo_asi_es_lex"
 return STR_VAR;
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 18 "algo_asi_es_lex"
+#line 19 "algo_asi_es_lex"
 return ADD_PLANET;
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 19 "algo_asi_es_lex"
+#line 20 "algo_asi_es_lex"
 return DOT;
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 20 "algo_asi_es_lex"
+#line 21 "algo_asi_es_lex"
 return OPEN_CURLY;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 21 "algo_asi_es_lex"
+#line 22 "algo_asi_es_lex"
 return CLOSE_CURLY;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 22 "algo_asi_es_lex"
+#line 23 "algo_asi_es_lex"
 return OPEN_PAR;
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 23 "algo_asi_es_lex"
+#line 24 "algo_asi_es_lex"
 return CLOSE_PAR;
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 24 "algo_asi_es_lex"
+#line 25 "algo_asi_es_lex"
 return ASSIGN;
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 25 "algo_asi_es_lex"
+#line 26 "algo_asi_es_lex"
 return XVEL;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 26 "algo_asi_es_lex"
+#line 27 "algo_asi_es_lex"
 return YVEL;
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 27 "algo_asi_es_lex"
+#line 28 "algo_asi_es_lex"
 return XPOS;
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 28 "algo_asi_es_lex"
+#line 29 "algo_asi_es_lex"
 return YPOS;
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 29 "algo_asi_es_lex"
+#line 30 "algo_asi_es_lex"
 return MASS;
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 30 "algo_asi_es_lex"
+#line 31 "algo_asi_es_lex"
 return COLOR;
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 31 "algo_asi_es_lex"
+#line 32 "algo_asi_es_lex"
 return NAME;
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 32 "algo_asi_es_lex"
+#line 33 "algo_asi_es_lex"
 return RADIUS;
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 33 "algo_asi_es_lex"
+#line 34 "algo_asi_es_lex"
 return VISIBILITY;
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 34 "algo_asi_es_lex"
+#line 35 "algo_asi_es_lex"
 return SEMICOLON;
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 35 "algo_asi_es_lex"
+#line 36 "algo_asi_es_lex"
 return PRINT;
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 36 "algo_asi_es_lex"
+#line 37 "algo_asi_es_lex"
 return INC_OP;
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 37 "algo_asi_es_lex"
+#line 38 "algo_asi_es_lex"
 return DEC_OP;
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 38 "algo_asi_es_lex"
+#line 39 "algo_asi_es_lex"
 return ADD_OP;
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 39 "algo_asi_es_lex"
+#line 40 "algo_asi_es_lex"
 return SUB_OP;
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 40 "algo_asi_es_lex"
+#line 41 "algo_asi_es_lex"
 return MUL_OP;
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 41 "algo_asi_es_lex"
+#line 42 "algo_asi_es_lex"
 return DIV_OP;
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 42 "algo_asi_es_lex"
+#line 43 "algo_asi_es_lex"
 return OR_OP;
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 43 "algo_asi_es_lex"
+#line 44 "algo_asi_es_lex"
 return AND_OP;
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 44 "algo_asi_es_lex"
+#line 45 "algo_asi_es_lex"
 return NOT_OP;
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 45 "algo_asi_es_lex"
+#line 46 "algo_asi_es_lex"
 return GT_OP;
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 46 "algo_asi_es_lex"
+#line 47 "algo_asi_es_lex"
 return GE_OP;
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 47 "algo_asi_es_lex"
+#line 48 "algo_asi_es_lex"
 return EQ_OP;
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 48 "algo_asi_es_lex"
+#line 49 "algo_asi_es_lex"
 return LE_OP;
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 49 "algo_asi_es_lex"
+#line 50 "algo_asi_es_lex"
 return LT_OP;
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 50 "algo_asi_es_lex"
+#line 51 "algo_asi_es_lex"
 return NE_OP;
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 51 "algo_asi_es_lex"
+#line 52 "algo_asi_es_lex"
 return TRUE;
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 52 "algo_asi_es_lex"
+#line 53 "algo_asi_es_lex"
 return FALSE;
 	YY_BREAK
 case 43:
 /* rule 43 can match eol */
 YY_RULE_SETUP
-#line 53 "algo_asi_es_lex"
+#line 54 "algo_asi_es_lex"
 return NEWLINE;
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 54 "algo_asi_es_lex"
+#line 55 "algo_asi_es_lex"
 return QUOTATION;
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 55 "algo_asi_es_lex"
+#line 56 "algo_asi_es_lex"
 {
-
 					char * ptr_String = (char *)calloc(strlen(yytext)+1, sizeof(char));
               		strcpy(ptr_String, yytext);
               		yylval.str = ptr_String;

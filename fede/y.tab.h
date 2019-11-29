@@ -152,10 +152,11 @@ union YYSTYPE
 {
 #line 34 "algo_asi_es_yacc" /* yacc.c:1909  */
 
- 	int number;
+ 	float number;
  	char * str;
+ 	bool boolean;
 
-#line 159 "y.tab.h" /* yacc.c:1909  */
+#line 160 "y.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

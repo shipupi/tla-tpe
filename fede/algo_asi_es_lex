@@ -2,6 +2,7 @@
 %{
 	#include <stdio.h>
 	#include <stdlib.h>
+	#include <stdbool.h>
 	#include "y.tab.h" 
 %}
 
@@ -53,7 +54,6 @@ false			return FALSE;
 ("\n")			return NEWLINE;
 ["]				return QUOTATION;
 [a-zA-Z]+		{
-
 					char * ptr_String = (char *)calloc(strlen(yytext)+1, sizeof(char));
               		strcpy(ptr_String, yytext);
               		yylval.str = ptr_String;
