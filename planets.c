@@ -55,9 +55,7 @@ void initiateSystem(char* fileName){
 	for(i=0;i<bodies;i++){
 		fscanf(fp,"%lf",&masses[i]);
 		fscanf(fp,"%lf%lf%lf",&positions[i].x,&positions[i].y,&positions[i].z);
-		fscanf(fp,"%lf%lf%lf",&velocities[i].x,&velocities[i].y,&velocities[i].z);
 		fscanf(fp,"%lf%lf%lf",&velocities[i].x,&velocities[i].y,&velocities[i].z); 
-
 	}
  
 	fclose(fp);
