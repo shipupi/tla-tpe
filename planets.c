@@ -11,6 +11,8 @@ typedef struct{
 }vector;
  
 int bodies,timeSteps;
+int *color, *radius, *visibility;
+char **name;
 double *masses,GravConstant;
 vector *positions,*velocities,*accelerations;
  
@@ -47,15 +49,57 @@ void initiateSystem(char* fileName){
  
 	fscanf(fp,"%lf%d%d",&GravConstant,&bodies,&timeSteps);
  
+ 	fprintf(stderr, "Inicio las variables \n");
 	masses = (double*)malloc(bodies*sizeof(double));
 	positions = (vector*)malloc(bodies*sizeof(vector));
 	velocities = (vector*)malloc(bodies*sizeof(vector));
 	accelerations = (vector*)malloc(bodies*sizeof(vector));
- 
+	visibility = (int*)malloc(bodies*sizeof(int));
+	radius = (int*)malloc(bodies*sizeof(int));
+	color = (int*)malloc(bodies*sizeof(int));
+	name = (char**)malloc(bodies*sizeof(char));
+
+	fprintf(stderr, "Seteo las variables \n");
 	for(i=0;i<bodies;i++){
 		fscanf(fp,"%lf",&masses[i]);
+		fprintf(stderr, "Seteo massas %lf \n",masses[i]);
+
 		fscanf(fp,"%lf%lf%lf",&positions[i].x,&positions[i].y,&positions[i].z);
-		fscanf(fp,"%lf%lf%lf",&velocities[i].x,&velocities[i].y,&velocities[i].z); 
+		fprintf(stderr, "Seteo positions %lf %lf\n",positions[i].x,positions[i].y);
+
+		fscanf(fp,"%lf%lf%lf",&velocities[i].x,&velocities[i].y,&velocities[i].z);
+		fprintf(stderr, "Seteo velocidades %lf %lf\n",velocities[i].x,velocities[i].y);
+
+		fscanf(fp,"%d%d",&radius[i],&color[i]);
+		fprintf(stderr, "Seteo radio %d y color  %d\n",radius[i],color[i]);
+		
+
+		char *namebuffer=(char*)calloc(256,sizeof(char));
+		char temp;
+		//fprintf(stderr, "Encontre %c\n",fgetc(fp));
+		fgetc(fp);
+		for(int j=0;j<256;j++){
+			temp=fgetc(fp);
+			//fprintf(stderr, "Encontre %c\n",temp);
+			if(temp!='\n' ){
+				//fprintf(stderr, "Lo puse\n");
+				namebuffer[j]=temp;
+			}else{
+				//printf(stderr, "No lo puse\n");
+				namebuffer[j]='\0';
+				break;
+			}
+		}
+
+		//fgets(namebuffer,256,fp);
+		//fscanf(fp,"%[^\n]",namebuffer);
+		name[i]=namebuffer;
+		fprintf(stderr, "Seteo name  %s\n",name[i]);
+		fprintf(stderr, "Seteo name  %s\n",namebuffer);
+
+		fscanf(fp,"%d",&visibility[i]);
+		fprintf(stderr, "Seteo visibility  %d\n",visibility[i]);
+
 	}
  
 	fclose(fp);
@@ -118,10 +162,10 @@ int main(int argC,char* argV[])
 	int gd = DETECT, gm; 
 	
 	//planet settings
-	int radius[5]={3,3,3,3,3};    						//tamaño
-	int color[5]={YELLOW,BLUE,RED,4,5};    					//del 0(negro) al 16
-	char *name[5]={"1","2","3","4","5"}; 				//nombres de los planetas
-	bool visibility[5]={true,true,true,true,true};		//visibilidad
+	//int radius[5]={3,3,3,3,3};    						//tamaño
+	//int color[5]={YELLOW,BLUE,RED,4,5};    					//del 0(negro) al 16
+	//char *name[5]={"1","2","3","4","5"}; 				//nombres de los planetas
+	//bool visibility[5]={true,true,true,true,true};		//visibilidad
 
 
 	signal(SIGTERM, sigterm_handler);
@@ -133,6 +177,7 @@ int main(int argC,char* argV[])
 	if(argC!=2)
 		fprintf(stderr, "Usage : %s <file name containing system configuration data>\n",argV[0]);
 	else{
+		fprintf(stderr, " Pre init \n");
 		initiateSystem(argV[1]);
 		int xoffset = getmaxx() / 2;
 		int yoffset = getmaxy() / 2;
@@ -193,7 +238,7 @@ int main(int argC,char* argV[])
 						//floodfill((positions[j].x*scale+xoffset),(positions[j].y*scale+yoffset),color[j]);
 					}
 				}else{
-					fprintf(stderr, "OUT OF BOUNDS");
+					fprintf(stderr, "OUT OF BOUNDS\n");
 
 				}			
 				fprintf(stderr, "Body %d : %lf\t%f\t%lf\t|\t%lf\t%lf\t%lf\n",j+1,positions[j].x,positions[j].y,positions[j].z,velocities[j].x,velocities[j].y,velocities[j].z);
