@@ -57,7 +57,7 @@
 
 
 %type <str> VAR_NAME print string_assign STRING_CONTENT
-%type <number> NUMBER int_assign expression term factor primary DECIMAL
+%type <number> NUMBER int_assign expression term factor primary DECIMAL access_int_property
 %type <boolean> bool_expression bool_term bool_factor bool comparison
 
 %start entity
@@ -66,7 +66,7 @@
 
 
 entity	: 
-		| INT_VAR VAR_NAME int_assign SEMICOLON NEWLINE entity			{/*CHECK SI EXISTE INT VAR_NAME, sino declarar y asignar int_assign*/}
+		| INT_VAR VAR_NAME int_assign SEMICOLON NEWLINE entity			{printf("INT %s = %f;\n",$2,$3);}
 		| STR_VAR VAR_NAME string_assign SEMICOLON NEWLINE entity		{/*CHECK SI EXISTE STR VAR_NAME, sino declarar y asignar string_assign*/}
 		| declaration SEMICOLON NEWLINE entity							{/*SE RESUELVE ADENTRO*/}
 		| control_block NEWLINE entity
@@ -85,34 +85,6 @@ print 	: PRINT OPEN_PAR VAR_NAME CLOSE_PAR  {printf("printing: %s",$3);}
 
 addplanet	: ADD_PLANET OPEN_PAR VAR_NAME CLOSE_PAR
 
-
-/* PARA FACILITARNOS LA VIDA PODEMOS REMOVER int_property, string_property Y bool_property Y CONDENSAR TODAS LAS PRODUCCIONES EN ASSIGN PROPERTY, VA A QUEDAR MAS FEO PERO VA A SER MAS FACIL */
-/* (Es lo que esta sin comentar abajo) */
-
-/*
-assign_property 	: VAR_NAME DOT int_property int_assign						{int_property[idx] = int_assign}
-					| VAR_NAME DOT string_property string_assign				{string_property[idx] = string_assign}
-					| VAR_NAME DOT bool_property bool_assign					{bool_property[idx] = bool_assign}
-					;		
-
-
-int_property 	: XVEL 
-				| YVEL
-				| XPOS
-				| YPOS
-				| MASS
-				| RADIUS
-				;
-
-
-string_property		: NAME
-					| COLOR
-					;
-
-
-bool_property	: VISIBILITY
-				;
-*/
 
 assign_property 	: VAR_NAME DOT XVEL int_assign
 					| VAR_NAME DOT YVEL int_assign	
@@ -135,8 +107,6 @@ declaration 	: STR_VAR VAR_NAME			{/*CHECK SI EXISTE STR VAR_NAME, sino declarar
 				| INT_VAR VAR_NAME			{/*CHECK SI EXISTE INT VAR_NAME, sino declarar*/}
 				| PLANET_VAR VAR_NAME		{/*CHECK SI EXISTE Planet VAR_NAME, sino declarar*/}
 				;
-
-
 
 
 
@@ -166,10 +136,20 @@ primary		: VAR_NAME							{/*RECUPERAR VALOR DEL ARRAY*/}
 			| NUMBER 							{$$ = $1;}
 			| DECIMAL							{$$ = $1;}
     		| OPEN_PAR expression CLOSE_PAR 	{$$ = $2;}
+    		| access_int_property				{$$ = $1;}
     		;
+
+access_int_property		: VAR_NAME DOT XVEL 	{$$ = 1;}
+						| VAR_NAME DOT YVEL 	{$$ = 1;}
+						| VAR_NAME DOT XPOS 	{$$ = 1;}
+						| VAR_NAME DOT YPOS 	{$$ = 1;}
+						| VAR_NAME DOT MASS 	{$$ = 1;}
+						| VAR_NAME DOT RADIUS 	{$$ = 1;}
+						;
 
 
 string_assign	: ASSIGN QUOTATION STRING_CONTENT QUOTATION		{$$ = $3;}
+				| ASSIGN QUOTATION VAR_NAME QUOTATION			{$$ = $3;}
 				;
 
 
@@ -211,7 +191,7 @@ bool 	: TRUE 												{$$ = true;}
 
 
 comparison 		: expression GT_OP expression 	{$$ = $1 > $3;} 
-				| expression GE_OP expression 	{$$ = $1>= $3;} 
+				| expression GE_OP expression 	{$$ = $1 >= $3;} 
 				| expression EQ_OP expression 	{$$ = $1 == $3;}
 				| expression LE_OP expression 	{$$ = $1 < $3;}
 				| expression LT_OP expression 	{$$ = $1 <= $3;}
@@ -229,7 +209,10 @@ void yyerror(char const *s)
 
 int main()
 {
-  yyparse();
-  return 1;
+	printf("arranca el codigo");
+ 	yyparse();
+ 	printf("termina el codigo");
+	return 1;
+
 }
     

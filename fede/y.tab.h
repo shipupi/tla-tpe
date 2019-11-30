@@ -92,7 +92,8 @@ extern int yydebug;
     TRUE = 302,
     FALSE = 303,
     NUMBER = 304,
-    DECIMAL = 305
+    DECIMAL = 305,
+    PRINTD = 306
   };
 #endif
 /* Tokens.  */
@@ -144,19 +145,20 @@ extern int yydebug;
 #define FALSE 303
 #define NUMBER 304
 #define DECIMAL 305
+#define PRINTD 306
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 
 union YYSTYPE
 {
-#line 36 "algo_asi_es_yacc" /* yacc.c:1909  */
+#line 37 "testyacc" /* yacc.c:1909  */
 
  	float number;
  	char * str;
  	bool boolean;
 
-#line 160 "y.tab.h" /* yacc.c:1909  */
+#line 162 "y.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

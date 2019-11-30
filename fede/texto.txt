@@ -1,0 +1,26 @@
+#include <stdbool.h>
+#include <stdio.h>
+struct Planet{
+ double xvel;
+ double yvel;
+ double xpos;
+ double ypos;
+ int color;
+ double mass;
+ double radius;
+ bool visibility;
+ char name[20];
+};
+int main(void){
+FILE *fp;
+fp = fopen("filename","w+");
+fprintf(fp, "\n");
+struct Planet p;
+fprintf(fp, "%ld\n",p.mass);
+fprintf(fp, "%lf %lf\n",p.xvel,p.yvel);
+fprintf(fp, "%lf %lf\n",p.xpos,p.ypos);
+fprintf(fp, "%lf %d\n",p.radius,p.color);
+fprintf(fp, "%s\n",p.name);
+fprintf(fp, "%d\n",p.visibility);
+;
+}
