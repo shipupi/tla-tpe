@@ -7,7 +7,7 @@
 
 
 typedef struct{
-	double x,y,z;
+	double x,y;
 }vector;
  
 int bodies,timeSteps;
@@ -15,19 +15,19 @@ double *masses,GravConstant;
 vector *positions,*velocities,*accelerations;
  
 vector addVectors(vector a,vector b){
-	vector c = {a.x+b.x,a.y+b.y,a.z+b.z};
+	vector c = {a.x+b.x,a.y+b.y};
  
 	return c;
 }
  
 vector scaleVector(double b,vector a){
-	vector c = {b*a.x,b*a.y,b*a.z};
+	vector c = {b*a.x,b*a.y};
  
 	return c;
 }
  
 vector subtractVectors(vector a,vector b){
-	vector c = {a.x-b.x,a.y-b.y,a.z-b.z};
+	vector c = {a.x-b.x,a.y-b.y};
  
 	return c;
 }
@@ -38,7 +38,7 @@ static void sigterm_handler(const int signal) {
 }
  
 double mod(vector a){
-	return sqrt(a.x*a.x + a.y*a.y + a.z*a.z);
+	return sqrt(a.x*a.x + a.y*a.y);
 }
  
 void initiateSystem(char* fileName){
@@ -54,8 +54,8 @@ void initiateSystem(char* fileName){
  
 	for(i=0;i<bodies;i++){
 		fscanf(fp,"%lf",&masses[i]);
-		fscanf(fp,"%lf%lf%lf",&positions[i].x,&positions[i].y,&positions[i].z);
-		fscanf(fp,"%lf%lf%lf",&velocities[i].x,&velocities[i].y,&velocities[i].z); 
+		fscanf(fp,"%lf%lf",&positions[i].x,&positions[i].y);
+		fscanf(fp,"%lf%lf",&velocities[i].x,&velocities[i].y); 
 	}
  
 	fclose(fp);
@@ -66,7 +66,7 @@ void resolveCollisions(){
  
 	for(i=0;i<bodies-1;i++)
 		for(j=i+1;j<bodies;j++){
-			if(positions[i].x==positions[j].x && positions[i].y==positions[j].y && positions[i].z==positions[j].z){
+			if(positions[i].x==positions[j].x && positions[i].y==positions[j].y){
 				vector temp = velocities[i];
 				velocities[i] = velocities[j];
 				velocities[j] = temp;
@@ -80,7 +80,6 @@ void computeAccelerations(){
 	for(i=0;i<bodies;i++){
 		accelerations[i].x = 0;
 		accelerations[i].y = 0;
-		accelerations[i].z = 0;
 		for(j=0;j<bodies;j++){
 			if(i!=j){
 				accelerations[i] = addVectors(accelerations[i],scaleVector(GravConstant*masses[j]/pow(mod(subtractVectors(positions[i],positions[j])),3),subtractVectors(positions[j],positions[i])));
@@ -138,7 +137,7 @@ int main(int argC,char* argV[])
 		int yoffset = getmaxy() / 2;
 		int scale = 1;
 		if (!visual) {
-			fprintf(stderr, "Body   :     x              y               z           |           vx              vy              vz   ");
+			fprintf(stderr, "Body   :     x              y                |           vx              vy              vz   ");
 		}
 		for(i=0;i<timeSteps;i++){
 			fprintf(stderr, "\nCycle %d\n",i+1);
@@ -196,7 +195,7 @@ int main(int argC,char* argV[])
 					fprintf(stderr, "OUT OF BOUNDS");
 
 				}			
-				fprintf(stderr, "Body %d : %lf\t%f\t%lf\t|\t%lf\t%lf\t%lf\n",j+1,positions[j].x,positions[j].y,positions[j].z,velocities[j].x,velocities[j].y,velocities[j].z);
+				fprintf(stderr, "Body %d : %lf\t%f\t|\t%lf\t%lf\n",j+1,positions[j].x,positions[j].y,velocities[j].x,velocities[j].y);
 
 			}
 			if (visual)  {
