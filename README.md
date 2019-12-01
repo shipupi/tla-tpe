@@ -3,7 +3,7 @@
 ## Trabajo Practico Especial de Automatas, Teoria de Lenguajes y Compiladores. ITBA. 2019-C2 
 ## Simulador grafico de interaccion fisica entre cuerpos celestes.</br>
 
-### Toda la informacion para buildear y ejecutar el programa se encuentra en el informe.
+### Toda la informacion para buildear y ejecutar el programa se encuentra en el informe, ubicado en la carpeta root con nombre informe.pdf
   
 ### Autores: 
 - Ail, Brian
