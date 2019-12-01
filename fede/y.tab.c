@@ -2109,7 +2109,7 @@ int main()
 	printf("int main(void){\n");
 	printf("int planet_quantity = 0;");
 	printf("FILE *fp;\n");
-	printf("fp = fopen(\"filename\",\"w+\");\n");
+	printf("fp = fopen(\"planet_info\",\"w+\");\n");
 	printf("fprintf(fp, \"\\n\");\n");
  	yyparse();
  	printf("fseek(fp,0,SEEK_SET);\n");

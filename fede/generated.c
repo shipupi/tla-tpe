@@ -13,7 +13,7 @@ struct Planet{
 };
 int main(void){
 int planet_quantity = 0;FILE *fp;
-fp = fopen("filename","w+");
+fp = fopen("planet_info","w+");
 fprintf(fp, "\n");
 struct Planet p;
 p.xvel=10.000000;
