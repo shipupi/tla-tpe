@@ -13,6 +13,6 @@
 
 ### Ejemplos
 
-![Planetoid](imgs/ejemplo1.jpeg)
+![Ejemplo 1](imgs/example1.jpeg)
 
-![Planetoid](imgs/ejemplo2.jpeg)
+![Ejemplo 2](imgs/example2.jpeg)
