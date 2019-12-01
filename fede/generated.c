@@ -12,9 +12,10 @@ struct Planet{
  char * name;
 };
 int main(void){
-int planet_quantity = 0;FILE *fp;
+int planet_quantity = 0;
+FILE *fp;
 fp = fopen("planet_info","w+");
-fprintf(fp, "\n");
+fprintf(fp, "              ");
 struct Planet p;
 p.xvel=10.000000;
 p.yvel=5.000000;
@@ -26,8 +27,11 @@ p.mass=0.500000;
 p.color=5.000000;
 p.visibility=0;
 float a=7.000000;
-printf("%f",p.mass);
-while(p.mass>5.000000){
+printf("Planet:");
+printf("%s\n",p.name);
+printf("Mass:");
+printf("%f\n",p.mass);
+while(a>5.000000){
 planet_quantity++;
 fprintf(fp, "%lf\n",p.mass);
 fprintf(fp, "%lf %lf\n",p.xvel,p.yvel);
@@ -39,4 +43,5 @@ a--;
 }
 fseek(fp,0,SEEK_SET);
 fprintf(fp, "0.01 %d 10000\n",planet_quantity);
+printf( "planet_info generated succesfully!\n");
 }

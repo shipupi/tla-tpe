@@ -9,8 +9,11 @@ p.mass =0.5;
 p.color = 5;
 p.visibility = false;
 int a = 7;
+print("Planet:");
+print_string(p.name);
+print("Mass:");
 print_digit(p.mass);
-while(p.mass>5){
+while(a>5){
 	addplanet(p);
 	a--;
 }
