@@ -87,8 +87,8 @@ printf	: PRINT 	{printf("printf");}
 addplanet	: ADD_PLANET OPEN_PAR VAR_NAME CLOSE_PAR  	{		
 																printf("planet_quantity++;\n");
 																printf("fprintf(fp, \"%%lf\\n\",%s.mass);\n",$3);
-																printf("fprintf(fp, \"%%lf %%lf\\n\",%s.xvel,%s.yvel);\n",$3,$3);
 																printf("fprintf(fp, \"%%lf %%lf\\n\",%s.xpos,%s.ypos);\n",$3,$3);
+																printf("fprintf(fp, \"%%lf %%lf\\n\",%s.xvel,%s.yvel);\n",$3,$3);
 																printf("fprintf(fp, \"%%lf %%d\\n\",%s.radius,%s.color);\n",$3,$3);
 																printf("fprintf(fp, \"%%s\\n\",%s.name);\n",$3);
 																printf("fprintf(fp, \"%%d\\n\",%s.visibility)",$3);
@@ -104,7 +104,7 @@ assign_property 	: var_name dot xvel int_assign
 					| var_name dot radius int_assign
 					| var_name dot name string_assign
 					| var_name dot color int_assign
-					| var_name dot visibility bool_assign
+					| var_name dot visibility int_assign
 					;
 
 
@@ -151,10 +151,10 @@ visibility 	: VISIBILITY {printf("visibility");}
 			;
 
 
-
+/*
 bool_assign		: assign bool_expression
 				;
-
+*/
 
 declaration 	: str_var var_name			
 				| int_var var_name			
@@ -363,7 +363,7 @@ int main()
 	printf("#include <stdbool.h>\n");
 	printf("#include <stdio.h>\n");
 
-	printf("struct Planet{\n double xvel;\n double yvel;\n double xpos;\n double ypos;\n int color;\n double mass;\n double radius;\n bool visibility;\n char * name;\n};\n");
+	printf("struct Planet{\n double xvel;\n double yvel;\n double xpos;\n double ypos;\n int color;\n double mass;\n double radius;\n int visibility;\n char * name;\n};\n");
 	printf("int main(void){\n");
 	printf("int planet_quantity = 0;\n");
 	printf("FILE *fp;\n");

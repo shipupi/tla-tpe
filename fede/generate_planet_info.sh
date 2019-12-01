@@ -8,7 +8,7 @@ if ./generate_compiler.sh; then
 				echo "Failed assigning privileges"
 			fi
 		else
-			echo "GCC error!"
+			echo "Syntax error!"
 		fi
 	else
 		echo "Syntax error!"

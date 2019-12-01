@@ -1,0 +1,33 @@
+Planet sun;
+sun.mass = 0.01;
+sun.xpos = 0;
+sun.ypos = 0;
+sun.xvel = 0;
+sun.yvel = 0;
+sun.radius = 15;
+sun.color = 14;
+sun.name = "SUN";
+sun.visibility = 1;
+addplanet(sun);
+Planet p;
+p.mass = 0.00001;
+p.ypos = -4;
+p.visibility = 1;
+p.radius = 3;
+p.name = "ENTITY";
+int i = 1;
+while(i < 3){
+	if(i == 1){
+		p.xpos = -2;
+		p.xvel = -0.002;
+		p.yvel = 0.004;
+		p.color = i;
+	}else{
+		p.xpos = 1;
+		p.xvel = 0.002;
+		p.yvel = 0.004;
+		p.color = i;
+	}
+	addplanet(p);
+	i++;
+}

@@ -11,7 +11,8 @@ typedef struct{
 }vector;
  
 int bodies,timeSteps;
-int *color, *radius, *visibility;
+int *color, *visibility;
+double *radius;
 char **name;
 double *masses,GravConstant;
 vector *positions,*velocities,*accelerations;
@@ -55,7 +56,7 @@ void initiateSystem(char* fileName){
 	velocities = (vector*)malloc(bodies*sizeof(vector));
 	accelerations = (vector*)malloc(bodies*sizeof(vector));
 	visibility = (int*)malloc(bodies*sizeof(int));
-	radius = (int*)malloc(bodies*sizeof(int));
+	radius = (double*)malloc(bodies*sizeof(double));
 	color = (int*)malloc(bodies*sizeof(int));
 	name = (char**)malloc(bodies*sizeof(char));
 
@@ -64,14 +65,14 @@ void initiateSystem(char* fileName){
 		fscanf(fp,"%lf",&masses[i]);
 		fprintf(stderr, "Seteo massas %lf \n",masses[i]);
 
-		fscanf(fp,"%lf%lf",&positions[i].x,&positions[i].y);
+		fscanf(fp,"%lf %lf",&positions[i].x,&positions[i].y);
 		fprintf(stderr, "Seteo positions %lf %lf\n",positions[i].x,positions[i].y);
 
-		fscanf(fp,"%lf%lf",&velocities[i].x,&velocities[i].y);
+		fscanf(fp,"%lf %lf",&velocities[i].x,&velocities[i].y);
 		fprintf(stderr, "Seteo velocidades %lf %lf\n",velocities[i].x,velocities[i].y);
 
-		fscanf(fp,"%d%d",&radius[i],&color[i]);
-		fprintf(stderr, "Seteo radio %d y color  %d\n",radius[i],color[i]);
+		fscanf(fp,"%lf %d",&radius[i],&color[i]);
+		fprintf(stderr, "Seteo radio %lf y color  %d\n",radius[i],color[i]);
 		
 
 		char *namebuffer=(char*)calloc(256,sizeof(char));
@@ -177,9 +178,9 @@ int main(int argC,char* argV[])
 	else{
 		fprintf(stderr, " Pre init \n");
 		initiateSystem(argV[1]);
-		int xoffset = getmaxx() / 2;
-		int yoffset = getmaxy() / 2;
-		int scale = 1;
+		double xoffset = getmaxx() / 2;
+		double yoffset = getmaxy() / 2;
+		double scale = 1;
 		if (!visual) {
 			fprintf(stderr, "Body   :     x              y                |           vx              vy              vz   ");
 		}
@@ -207,17 +208,17 @@ int main(int argC,char* argV[])
 			simulate();
 
 			if (i == 0) {
-				int xm = 0;
-				int ym = 0;
+				double xm = 0;
+				double ym = 0;
 				for(j=0;j<bodies;j++){
-					if (positions[j].x > xm) {
-						xm = positions[j].x;
+					if (abs(positions[j].x) > xm) {
+						xm =abs(positions[j].x);
 					}
-					if (positions[j].y > ym) {
-						ym = positions[j].y;
+					if (abs(positions[j].y) > ym) {
+						ym = abs(positions[j].y);
 					}
 				}
-				int determining_value = MAX(xm,ym);
+				double determining_value = MAX(xm,ym);
 				if (determining_value == xm) {
 					scale = (0.8 * getmaxx() / 2) / xm;
 				} else {
@@ -243,7 +244,7 @@ int main(int argC,char* argV[])
 
 			}
 			if (visual)  {
-				delay(3);
+				delay(10);
 			}
 
 		}
