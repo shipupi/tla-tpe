@@ -13,7 +13,7 @@ Planet p;
 p.mass = 0.000001003;
 p.xpos = 0;
 p.ypos = -13;
-p.xvel = 0.06;
+p.xvel = 0.01;
 p.yvel = 0;
 p.radius = 3;
 p.color = 5;

@@ -20,7 +20,7 @@ p.ypos = 10;
 p.xvel = 0.031622777;
 p.yvel = 0;
 p.radius = 3;
-p.color = 5;
+p.color = 2;
 p.name = "EARTH";
 p.visibility = 1;
 addplanet(p);

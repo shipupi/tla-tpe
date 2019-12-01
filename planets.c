@@ -36,7 +36,7 @@ vector subtractVectors(vector a,vector b){
 }
 
 static void sigterm_handler(const int signal) {
-  printf("Signal detected\n");
+  //printf("Signal detected\n");
   abort();
 }
  
@@ -75,7 +75,7 @@ void initiateSystem(char* fileName){
  
 	fscanf(fp,"%lf%d%d",&GravConstant,&bodies,&timeSteps);
  
- 	fprintf(stderr, "Inicio las variables \n");
+ 	//fprintf(stderr, "Inicio las variables \n");
 	masses = (double*)malloc(bodies*sizeof(double));
 	positions = (vector*)malloc(bodies*sizeof(vector));
 	positionsAux = (vector*)malloc(bodies*sizeof(vector));
@@ -86,30 +86,30 @@ void initiateSystem(char* fileName){
 	color = (int*)malloc(bodies*sizeof(int));
 	name = (char**)malloc(bodies*sizeof(char));
 
-	fprintf(stderr, "Seteo las variables \n");
+	//printf(stderr, "Seteo las variables \n");
 	for(i=0;i<bodies;i++){
 		fscanf(fp,"%lf",&masses[i]);
-		fprintf(stderr, "Seteo massas %lf \n",masses[i]);
+		//printf(stderr, "Seteo massas %lf \n",masses[i]);
 
 		fscanf(fp,"%lf %lf",&positions[i].x,&positions[i].y);
-		fprintf(stderr, "Seteo positions %lf %lf\n",positions[i].x,positions[i].y);
+		//printf(stderr, "Seteo positions %lf %lf\n",positions[i].x,positions[i].y);
 
 		fscanf(fp,"%lf %lf",&velocities[i].x,&velocities[i].y);
-		fprintf(stderr, "Seteo velocidades %lf %lf\n",velocities[i].x,velocities[i].y);
+		//printf(stderr, "Seteo velocidades %lf %lf\n",velocities[i].x,velocities[i].y);
 
 		fscanf(fp,"%lf %d",&radius[i],&color[i]);
-		fprintf(stderr, "Seteo radio %lf y color  %d\n",radius[i],color[i]);
+		//printf(stderr, "Seteo radio %lf y color  %d\n",radius[i],color[i]);
 		
 
 		char *namebuffer=(char*)calloc(256,sizeof(char));
 		char temp;
-		//fprintf(stderr, "Encontre %c\n",fgetc(fp));
+		////printf(stderr, "Encontre %c\n",fgetc(fp));
 		fgetc(fp);
 		for(int j=0;j<256;j++){
 			temp=fgetc(fp);
-			//fprintf(stderr, "Encontre %c\n",temp);
+			////printf(stderr, "Encontre %c\n",temp);
 			if(temp!='\n' ){
-				//fprintf(stderr, "Lo puse\n");
+				////printf(stderr, "Lo puse\n");
 				namebuffer[j]=temp;
 			}else{
 				//printf(stderr, "No lo puse\n");
@@ -121,11 +121,11 @@ void initiateSystem(char* fileName){
 		//fgets(namebuffer,256,fp);
 		//fscanf(fp,"%[^\n]",namebuffer);
 		name[i]=namebuffer;
-		fprintf(stderr, "Seteo name  %s\n",name[i]);
-		fprintf(stderr, "Seteo name  %s\n",namebuffer);
+		//printf(stderr, "Seteo name  %s\n",name[i]);
+		//printf(stderr, "Seteo name  %s\n",namebuffer);
 
 		fscanf(fp,"%d",&visibility[i]);
-		fprintf(stderr, "Seteo visibility  %d\n",visibility[i]);
+		//printf(stderr, "Seteo visibility  %d\n",visibility[i]);
 	}
  
 	fclose(fp);
@@ -199,10 +199,11 @@ int main(int argC,char* argV[])
 	if (visual) {
     	initgraph(&gd, &gm, NULL);
 	}
-	if(argC!=2)
-		fprintf(stderr, "Usage : %s <file name containing system configuration data>\n",argV[0]);
+	if(argC!=2){
+		//printf(stderr, "Usage : %s <file name containing system configuration data>\n",argV[0]);
+	}
 	else{
-		fprintf(stderr, " Pre init \n");
+		//printf(stderr, " Pre init \n");
 		initiateSystem(argV[1]);
 		double xoffset = getmaxx() / 2;
 		double yoffset = getmaxy() / 2;
@@ -210,10 +211,10 @@ int main(int argC,char* argV[])
 		double params[3];
 		pthread_t thread_id;
 		if (!visual) {
-			//fprintf(stderr, "Body   :     x              y                |           vx              vy              vz   ");
+			////printf(stderr, "Body   :     x              y                |           vx              vy              vz   ");
 		}
 		for(i=0;i<timeSteps;i++){
-			//fprintf(stderr, "\nCycle %d\n",i+1);
+			////printf(stderr, "\nCycle %d\n",i+1);
 			
 			//borro de la pantalla
 			//for(j=0;j<bodies;j++){
@@ -230,7 +231,7 @@ int main(int argC,char* argV[])
 			//			//floodfill((positions[j].x*scale+xoffset),(positions[j].y*scale+yoffset),color[j]);
 			//		}
 			//	}				
-			//	fprintf(stderr, "Body %d : %lf\t%f\t%lf\t|\t%lf\t%lf\t%lf\n",j+1,positions[j].x,positions[j].y,positions[j].z,velocities[j].x,velocities[j].y,velocities[j].z);
+			//	//printf(stderr, "Body %d : %lf\t%f\t%lf\t|\t%lf\t%lf\t%lf\n",j+1,positions[j].x,positions[j].y,positions[j].z,velocities[j].x,velocities[j].y,velocities[j].z);
 			//}
 
 			simulate();
@@ -256,7 +257,7 @@ int main(int argC,char* argV[])
 
 			if(visual && i%3==0){		
 				if(i>0){
-				//	fprintf(stderr, "Espero al thread \n");
+				//	//printf(stderr, "Espero al thread \n");
 					pthread_join(thread_id,NULL);
 				}
 				cleardevice();
@@ -264,13 +265,13 @@ int main(int argC,char* argV[])
 				params[0]=scale;
 				params[1]=xoffset;
 				params[2]=yoffset;
-				//fprintf(stderr, "Creo al thread \n");
+				////printf(stderr, "Creo al thread \n");
 				pthread_create(&thread_id, NULL, drawPlanets, (void*)params);
 				//drawPlanets(scale,xoffset,yoffset);
 			}
 			
 			if (visual)  {
-				delay(10);
+				delay(3);
 			}
 
 		}
