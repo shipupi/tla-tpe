@@ -177,9 +177,9 @@ int main(int argC,char* argV[])
 	else{
 		fprintf(stderr, " Pre init \n");
 		initiateSystem(argV[1]);
-		int xoffset = getmaxx() / 2;
-		int yoffset = getmaxy() / 2;
-		int scale = 1;
+		double xoffset = getmaxx() / 2;
+		double yoffset = getmaxy() / 2;
+		long scale = 1;
 		if (!visual) {
 			fprintf(stderr, "Body   :     x              y                |           vx              vy              vz   ");
 		}
@@ -207,8 +207,8 @@ int main(int argC,char* argV[])
 			simulate();
 
 			if (i == 0) {
-				int xm = 0;
-				int ym = 0;
+				double xm = 0;
+				double ym = 0;
 				for(j=0;j<bodies;j++){
 					if (positions[j].x > xm) {
 						xm = positions[j].x;
