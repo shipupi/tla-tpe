@@ -1,4 +1,4 @@
-# tla-tpe
+![Planetoid](planetoid.png)
 
 Compilador<br />
 
