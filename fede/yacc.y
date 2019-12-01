@@ -25,7 +25,7 @@
 %token OR_OP AND_OP NOT_OP 
 %token GT_OP GE_OP EQ_OP LE_OP LT_OP NE_OP
 %token TRUE FALSE
-%token NUMBER DECIMAL PRINTD
+%token NUMBER DECIMAL PRINTD PRINTS
 
 %type <number>	NUMBER DECIMAL
 %type <str> 	VAR_NAME STRING_CONTENT 
@@ -47,7 +47,8 @@ entity	:
 		| assign_property semicolon newline entity						
 		| print semicolon newline entity 								
 		| addplanet semicolon newline entity
-		| print_digit semicolon newline entity							
+		| print_digit semicolon newline entity	
+		| print_string semicolon newline entity						
 		;
 
 
@@ -64,8 +65,15 @@ dec_op 	: DEC_OP  {printf("--");}
 print_digit 	: printd expression close_par
 				;
 
-printd 			: PRINTD 		{printf("printf(\"%%f\",");}
+print_string	: prints var_name dot name close_par
 				;
+
+printd 			: PRINTD 		{printf("printf(\"%%f\\n\",");}
+				;
+
+prints 			: PRINTS 		{printf("printf(\"%%s\\n\",");}
+				;
+
 
 print 	: printf open_par quotation var_name quotation close_par  
 		| printf open_par quotation string_content quotation close_par
@@ -357,16 +365,17 @@ int main()
 
 	printf("struct Planet{\n double xvel;\n double yvel;\n double xpos;\n double ypos;\n int color;\n double mass;\n double radius;\n bool visibility;\n char * name;\n};\n");
 	printf("int main(void){\n");
-	printf("int planet_quantity = 0;");
+	printf("int planet_quantity = 0;\n");
 	printf("FILE *fp;\n");
 	printf("fp = fopen(\"planet_info\",\"w+\");\n");
-	printf("fprintf(fp, \"\\n\");\n");
+	printf("fprintf(fp, \"              \");\n");
  	yyparse();
  	printf("fseek(fp,0,SEEK_SET);\n");
 
  	printf("fprintf(fp, \"0.01 %%d 10000\\n\",planet_quantity);\n");
 
+ 	printf("printf( \"planet_info generated succesfully!\\n\");\n");
  	printf("}");
-	return 1;
+	return 0;
 
 }
