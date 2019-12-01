@@ -8,6 +8,7 @@ if ./generate_compiler.sh; then
 				echo "Failed assigning privileges"
 			fi
 		else
+			cat generated.c | grep "error"
 			echo "Syntax error!"
 		fi
 	else

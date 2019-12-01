@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <math.h>
 #include <graphics.h>
-
+#include <pthread.h>
 
 
 typedef struct{
@@ -15,7 +15,7 @@ int *color, *visibility;
 double *radius;
 char **name;
 double *masses,GravConstant;
-vector *positions,*velocities,*accelerations;
+vector *positions,*velocities,*accelerations, *positionsAux;
  
 vector addVectors(vector a,vector b){
 	vector c = {a.x+b.x,a.y+b.y};
@@ -43,6 +43,31 @@ static void sigterm_handler(const int signal) {
 double mod(vector a){
 	return sqrt(a.x*a.x + a.y*a.y);
 }
+
+void * drawPlanets(void *params){
+
+	double *doubles=(double*) params;	
+	double scale=doubles[0];
+	double xoffset=doubles[1];
+	double yoffset=doubles[2];
+	for(int j=0;j<bodies;j++){
+		//fprintf(stderr, "Body %d : %lf\t%f\t|",j+1,positionsAux[j].x,positionsAux[j].y);
+		if (visibility[j] && (positionsAux[j].x*scale+xoffset)<getmaxx() && (positionsAux[j].x*scale+xoffset)>=0 && (positionsAux[j].y*scale+yoffset)<getmaxy() && (positionsAux[j].y*scale+yoffset) >=0 )  {
+					/* code */
+			setcolor(color[j]);
+			fillellipse((positionsAux[j].x*scale+xoffset),(positionsAux[j].y*scale+yoffset), radius[j], radius[j]);
+			outtextxy((positionsAux[j].x*scale+xoffset+radius[j]+5),(positionsAux[j].y*scale+yoffset+radius[j]+3),name[j]);
+			//circle((positions[j].x*scale+xoffset),(positions[j].y*scale+yoffset),radius[j]);
+			//floodfill((positions[j].x*scale+xoffset),(positions[j].y*scale+yoffset),color[j]);
+		}else{
+			//fprintf(stderr, "OUT OF BOUNDS\n");
+
+		}			
+
+	}
+
+	return NULL;
+} 
  
 void initiateSystem(char* fileName){
 	int i;
@@ -53,6 +78,7 @@ void initiateSystem(char* fileName){
  	fprintf(stderr, "Inicio las variables \n");
 	masses = (double*)malloc(bodies*sizeof(double));
 	positions = (vector*)malloc(bodies*sizeof(vector));
+	positionsAux = (vector*)malloc(bodies*sizeof(vector));
 	velocities = (vector*)malloc(bodies*sizeof(vector));
 	accelerations = (vector*)malloc(bodies*sizeof(vector));
 	visibility = (int*)malloc(bodies*sizeof(int));
@@ -162,8 +188,8 @@ int main(int argC,char* argV[])
 	
 	//planet settings
 	//int radius[5]={3,3,3,3,3};    						//tamaño
-	//int color[5]={YELLOW,BLUE,RED,4,5};    					//del 0(negro) al 16
-	//char *name[5]={"1","2","3","4","5"}; 				//nombres de los planetas
+	//int color[5]={YELLOW,BLUE,RED,4,5};    				//del 0(negro) al 16
+	//char *name[5]={"1","2","3","4","5"}; 					//nombres de los planetas
 	//bool visibility[5]={true,true,true,true,true};		//visibilidad
 
 
@@ -181,11 +207,13 @@ int main(int argC,char* argV[])
 		double xoffset = getmaxx() / 2;
 		double yoffset = getmaxy() / 2;
 		double scale = 1;
+		double params[3];
+		pthread_t thread_id;
 		if (!visual) {
-			fprintf(stderr, "Body   :     x              y                |           vx              vy              vz   ");
+			//fprintf(stderr, "Body   :     x              y                |           vx              vy              vz   ");
 		}
 		for(i=0;i<timeSteps;i++){
-			fprintf(stderr, "\nCycle %d\n",i+1);
+			//fprintf(stderr, "\nCycle %d\n",i+1);
 			
 			//borro de la pantalla
 			//for(j=0;j<bodies;j++){
@@ -206,13 +234,13 @@ int main(int argC,char* argV[])
 			//}
 
 			simulate();
-
+			
 			if (i == 0) {
 				double xm = 0;
 				double ym = 0;
 				for(j=0;j<bodies;j++){
 					if (abs(positions[j].x) > xm) {
-						xm =abs(positions[j].x);
+						xm = abs(positions[j].x);
 					}
 					if (abs(positions[j].y) > ym) {
 						ym = abs(positions[j].y);
@@ -225,24 +253,22 @@ int main(int argC,char* argV[])
 					scale = (0.8 * getmaxy() / 2) / ym;
 				}
 			}
-			cleardevice();
-			for(j=0;j<bodies;j++){
-				if (visual && (positions[j].x*scale+xoffset)<getmaxx() && (positions[j].x*scale+xoffset)>=0 && (positions[j].y*scale+yoffset)<getmaxy() && (positions[j].y*scale+yoffset) >=0 )  {
-							/* code */
-					setcolor(color[j]);
-					if(visibility[j]){
-						outtextxy((positions[j].x*scale+xoffset+radius[j]+5),(positions[j].y*scale+yoffset+radius[j]+3),name[j]);
-						fillellipse((positions[j].x*scale+xoffset),(positions[j].y*scale+yoffset), radius[j], radius[j]);
-						//circle((positions[j].x*scale+xoffset),(positions[j].y*scale+yoffset),radius[j]);
-						//floodfill((positions[j].x*scale+xoffset),(positions[j].y*scale+yoffset),color[j]);
-					}
-				}else{
-					fprintf(stderr, "OUT OF BOUNDS\n");
 
-				}			
-				fprintf(stderr, "Body %d : %lf\t%f\t|\t%lf\t%lf\n",j+1,positions[j].x,positions[j].y,velocities[j].x,velocities[j].y);
-
+			if(visual && i%3==0){		
+				if(i>0){
+				//	fprintf(stderr, "Espero al thread \n");
+					pthread_join(thread_id,NULL);
+				}
+				cleardevice();
+				memcpy(positionsAux,positions,bodies*sizeof(vector));
+				params[0]=scale;
+				params[1]=xoffset;
+				params[2]=yoffset;
+				//fprintf(stderr, "Creo al thread \n");
+				pthread_create(&thread_id, NULL, drawPlanets, (void*)params);
+				//drawPlanets(scale,xoffset,yoffset);
 			}
+			
 			if (visual)  {
 				delay(10);
 			}
