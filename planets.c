@@ -11,7 +11,8 @@ typedef struct{
 }vector;
  
 int bodies,timeSteps;
-int *color, *radius, *visibility;
+int *color, *visibility;
+double *radius;
 char **name;
 double *masses,GravConstant;
 vector *positions,*velocities,*accelerations, *positionsAux;
@@ -81,7 +82,7 @@ void initiateSystem(char* fileName){
 	velocities = (vector*)malloc(bodies*sizeof(vector));
 	accelerations = (vector*)malloc(bodies*sizeof(vector));
 	visibility = (int*)malloc(bodies*sizeof(int));
-	radius = (int*)malloc(bodies*sizeof(int));
+	radius = (double*)malloc(bodies*sizeof(double));
 	color = (int*)malloc(bodies*sizeof(int));
 	name = (char**)malloc(bodies*sizeof(char));
 
@@ -90,14 +91,14 @@ void initiateSystem(char* fileName){
 		fscanf(fp,"%lf",&masses[i]);
 		fprintf(stderr, "Seteo massas %lf \n",masses[i]);
 
-		fscanf(fp,"%lf%lf",&positions[i].x,&positions[i].y);
+		fscanf(fp,"%lf %lf",&positions[i].x,&positions[i].y);
 		fprintf(stderr, "Seteo positions %lf %lf\n",positions[i].x,positions[i].y);
 
-		fscanf(fp,"%lf%lf",&velocities[i].x,&velocities[i].y);
+		fscanf(fp,"%lf %lf",&velocities[i].x,&velocities[i].y);
 		fprintf(stderr, "Seteo velocidades %lf %lf\n",velocities[i].x,velocities[i].y);
 
-		fscanf(fp,"%d%d",&radius[i],&color[i]);
-		fprintf(stderr, "Seteo radio %d y color  %d\n",radius[i],color[i]);
+		fscanf(fp,"%lf %d",&radius[i],&color[i]);
+		fprintf(stderr, "Seteo radio %lf y color  %d\n",radius[i],color[i]);
 		
 
 		char *namebuffer=(char*)calloc(256,sizeof(char));
@@ -207,7 +208,7 @@ int main(int argC,char* argV[])
 		double yoffset = getmaxy() / 2;
 		double scale = 1;
 		double params[3];
-		pthread_t thread_id; 
+		pthread_t thread_id;
 		if (!visual) {
 			//fprintf(stderr, "Body   :     x              y                |           vx              vy              vz   ");
 		}
@@ -269,7 +270,7 @@ int main(int argC,char* argV[])
 			}
 			
 			if (visual)  {
-				delay(3);
+				delay(10);
 			}
 
 		}
