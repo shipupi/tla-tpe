@@ -73,7 +73,7 @@ false			return FALSE;
               		return DECIMAL;
 			}
 
-[a-zA-Z0-9:]+         {
+[a-zA-Z0-9:_!]+         {
                             char * ptr_String = (char *)calloc(strlen(yytext)+1, sizeof(char));
               		strcpy(ptr_String, yytext);
               		yylval.str = ptr_String;
