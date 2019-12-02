@@ -47,17 +47,22 @@ siguientes pasos 1:
 
 Los pasos para realizar una simulación son:
 1. Generar el archivo intermedio corriendo la línea:
-	``` $> ./generate_planet_info.sh path_al_archivo ```
+	```
+	$> ./generate_planet_info.sh path_al_archivo 
+	```
 2. Correr el archivo intermedio llamado “planet_info” con la siguiente línea:
-	``` $> ./planets planet_info ```
+	```
+	$> ./planets planet_info
+	```
 3. Enjoy the show!
 
-A modo de ejemplo, para correr el Test N°1, deberíamos pararnos en el
-directorio raíz del proyecto y correr las siguientes líneas:
-		``` 
-			$> ./generate_planet_info.sh tests/test1.txt
-			$> ./planets planet_info 
-		```
+	A modo de ejemplo, para correr el Test N°1, deberíamos pararnos en el
+	directorio raíz del proyecto y correr las siguientes líneas:
+
+	``` 
+		$> ./generate_planet_info.sh tests/test1.txt
+		$> ./planets planet_info 
+	```
 
 ### Ejemplos
 
